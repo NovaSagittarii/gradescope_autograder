@@ -21,7 +21,7 @@ for file in files:
     if file.endswith(".cpp"):
         language = "cpp"
     elif file.endswith(".py"):
-        language = "py"
+        language = "py3"
 
 subprocess.run(
     f"du -sb {SOURCE_PATH}/* | cut -f 1 > {SOURCE_PATH}/size.meta", shell=True
@@ -39,7 +39,7 @@ match language:
             check=False,
         )
         stderr = p.stderr.decode()
-    case "py":  # build python (make an a.out executable that runs the python)
+    case "py3":  # build python (make an a.out executable that runs the python)
         with open(f"{SOURCE_PATH}/a.out", "w") as f:
             f.write(f"#!/usr/bin/env bash\npython3 {SOURCE_PATH}/*.py")
         subprocess.run(f"chmod +x {SOURCE_PATH}/a.out", shell=True)
