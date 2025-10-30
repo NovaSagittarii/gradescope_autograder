@@ -23,10 +23,13 @@ for id, test in tests.items():
         ans = file.read()
     with open(f"{ANS_PATH}/{id}.err", "r") as file:
         stderr = file.read()
+    with open(f"{ANS_PATH}/{id}.time", "r") as file:
+        runtime_ms = int(file.read())
 
     result = task_details.judge(jans, ans)
 
-    partial_output = f"{'Accepted' if result.passed else 'Wrong answer'}"
+    partial_output = f"""{'Accepted' if result.passed else 'Wrong answer'}
+Runtime: {runtime_ms} ms"""
     full_output = f"""{partial_output}
 
 # Input
