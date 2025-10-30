@@ -6,6 +6,7 @@ apt install -y g++ python3 python3-pip
 pip3 install pyseccomp
 
 ### Generating answer files (ahead of time for faster grading). ###
+mkdir -p /autograder/results
 cd /autograder/source/src
 python3 compile.py solution
 python3 exec.py solution

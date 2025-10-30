@@ -98,7 +98,7 @@ class open_json:
         try:
             with open(RESULTS_PATH, "r") as file:
                 self.data = json.load(file)
-        except OSError:
+        except (OSError, json.JSONDecodeError):
             pass
         assert isinstance(self.data, dict)
         return self.data
