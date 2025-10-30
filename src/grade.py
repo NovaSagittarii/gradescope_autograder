@@ -16,6 +16,9 @@ ANS_PATH = sys.argv[2]
 
 tests = task_details.generate_tests()
 
+with open(f"{ANS_PATH}/size.meta", "r") as file:
+    filesize = int(file.read())
+
 for id, test in tests.items():
     with open(f"{JANS_PATH}/{id}.out", "r") as file:
         jans = file.read()

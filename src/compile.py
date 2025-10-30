@@ -23,6 +23,10 @@ for file in files:
     elif file.endswith(".py"):
         language = "py"
 
+subprocess.run(
+    f"du -sb {SOURCE_PATH}/* | cut -f 1 > {SOURCE_PATH}/size.meta", shell=True
+)
+
 stderr: Optional[str] = None
 match language:
     case "cpp":  # build cpp
