@@ -26,6 +26,8 @@ for file in files:
 subprocess.run(
     f"du -sb {SOURCE_PATH}/* | cut -f 1 > {SOURCE_PATH}/size.meta", shell=True
 )
+with open(f"{SOURCE_PATH}/lang.meta", "w") as f:
+    f.write(language if language else "N/A")
 
 stderr: Optional[str] = None
 match language:

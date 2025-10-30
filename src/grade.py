@@ -18,6 +18,8 @@ tests = task_details.generate_tests()
 
 with open(f"{ANS_PATH}/size.meta", "r") as file:
     filesize = int(file.read())
+with open(f"{ANS_PATH}/lang.meta", "r") as file:
+    language = file.read()
 
 passed_all = True
 for id, test in tests.items():
@@ -82,8 +84,9 @@ gradescope.finalize(
     leaderboard=(
         [
             gradescope.LeaderboardStat(
-                "Size", filesize, gradescope.LeaderboardStat.OrderType.ASCENDING
-            )
+                "Size (bytes)", filesize, gradescope.LeaderboardStat.OrderType.ASCENDING
+            ),
+            gradescope.LeaderboardStat("Language", language),
         ]
         if passed_all
         else None

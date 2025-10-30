@@ -101,7 +101,10 @@ class LeaderboardStat:
         """
 
     def __init__(
-        self, name: str, value: float, order_type: OrderType = OrderType.DESCENDING
+        self,
+        name: str,
+        value: int | float | str,
+        order_type: OrderType = OrderType.DESCENDING,
     ):
         self.name = name
         self.value = value
