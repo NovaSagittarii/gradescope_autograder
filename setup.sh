@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
 ### Installing dependencies ###
 apt install -y g++ python3 python3-pip
 pip3 install pyseccomp
