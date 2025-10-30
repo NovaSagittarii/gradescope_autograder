@@ -15,5 +15,7 @@ python3 exec.py solution
 echo > /autograder/results/results.json
 
 # setup permissions for grading
-find / -type f -exec chmod 640 {}
+find /usr/bin -type f -exec chmod 750 {} \; > /dev/null 2>&1
+find /autograder -type f -exec chmod 750 {} \; > /dev/null 2>&1
+chmod 755 $(which python3) /usr/bin/env $(which bash)
 adduser student --no-create-home --disabled-password --gecos ""
