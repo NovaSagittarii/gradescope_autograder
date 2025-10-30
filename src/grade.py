@@ -23,6 +23,7 @@ for id, test in tests.items():
         ans = file.read()
     with open(f"{ANS_PATH}/{id}.err", "r") as file:
         stderr = file.read()
+        stderr = f"\n# Errors\n```\n{stderr}```\n" if stderr else ""
     with open(f"{ANS_PATH}/{id}.time", "r") as file:
         runtime_ms = int(file.read())
 
@@ -39,7 +40,7 @@ Runtime: {runtime_ms} ms"""
 # Output
 ```
 {ans}```
-
+{stderr}
 # Answer
 ```
 {jans}```"""
