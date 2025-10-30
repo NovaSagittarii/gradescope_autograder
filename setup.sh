@@ -5,6 +5,9 @@ set -euo pipefail
 # apt install -y g++ python3 python3-pip
 pip3 install pyseccomp
 
+# create the student user early (since exec.py runs using restricted user)
+adduser student --no-create-home --disabled-password --gecos ""
+
 ### Generating answer files (ahead of time for faster grading). ###
 mkdir -p /autograder/results
 cd /autograder/source/src
@@ -21,4 +24,3 @@ find /var /lib -type f -perm /001 -exec chmod o-x {} \; 2>/dev/null
 # remove any write perms
 find / -type d -perm /002 -exec chmod o-w {} \; 2>/dev/null
 chmod 755 $(which python3) /usr/bin/env $(which bash)
-adduser student --no-create-home --disabled-password --gecos ""
