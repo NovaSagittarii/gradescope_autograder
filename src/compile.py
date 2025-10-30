@@ -39,8 +39,8 @@ match language:
         subprocess.run(f"chmod +x {SOURCE_PATH}/a.out", shell=True)
     case None:
         pass
-print("[compile.py] LANGUAGE=", language)
-print(stderr)
 
+print("[compile.py] LANGUAGE=", language)
 if stderr:
-    gradescope.append_test(f"Compile Error ({language})", 'failed', output=stderr)
+    print(stderr)
+    gradescope.append_test(f"Compile Error ({language})", "failed", output=stderr)
