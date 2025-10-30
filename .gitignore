@@ -1,0 +1,12 @@
+*.tex
+/*.zip
+/*.cpp
+/*.py
+
+**/__pycache__
+**/.mypy_cache
+**/.pytest_cache
+**/.vscode
+
+*.o
+*.out

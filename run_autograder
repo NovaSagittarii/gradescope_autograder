@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd /autograder/source/src
+python3 compile.py /autograder/submission
+python3 exec.py /autograder/submission
+python3 grade.py /autograder/source/src/solution /autograder/submission
