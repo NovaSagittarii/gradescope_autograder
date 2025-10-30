@@ -19,6 +19,7 @@ tests = task_details.generate_tests()
 with open(f"{ANS_PATH}/size.meta", "r") as file:
     filesize = int(file.read())
 
+passed_all = True
 for id, test in tests.items():
     with open(f"{JANS_PATH}/{id}.out", "r") as file:
         jans = file.read()
@@ -31,6 +32,8 @@ for id, test in tests.items():
         runtime_ms = int(file.read())
 
     result = task_details.judge(jans, ans)
+    if not result.passed:
+        passed_all = False
 
     partial_output = f"""{'Accepted' if result.passed else 'Wrong answer'}
 Runtime: {runtime_ms} ms"""
@@ -75,4 +78,14 @@ Runtime: {runtime_ms} ms"""
             visibility=gradescope.VisibilityType.HIDDEN,
         )
 
-gradescope.finalize()
+gradescope.finalize(
+    leaderboard=(
+        [
+            gradescope.LeaderboardStat(
+                "Size", filesize, gradescope.LeaderboardStat.OrderType.ASCENDING
+            )
+        ]
+        if passed_all
+        else None
+    )
+)

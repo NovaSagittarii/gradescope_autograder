@@ -89,6 +89,32 @@ class VisibilityType(Enum):
     """
 
 
+class LeaderboardStat:
+    class OrderType(Enum):
+        DESCENDING = "desc"
+        """
+        (default) higher places higher on the leaderboard (i.e. points)
+        """
+        ASCENDING = "desc"
+        """
+        lower places higher on leaderboard (i.e. runtime)
+        """
+
+    def __init__(
+        self, name: str, value: float, order_type: OrderType = OrderType.DESCENDING
+    ):
+        self.name = name
+        self.value = value
+        self.type = order_type
+
+    def encode(self) -> dict:
+        return {
+            "name": self.name,
+            "value": self.value,
+            "type": self.type.value,
+        }
+
+
 class open_json:
     def __init__(self, filepath: str):
         self.filepath = filepath
@@ -149,7 +175,7 @@ def append_test(
 
 
 def finalize(
-    leaderboard: Optional[list[dict]] = None,
+    leaderboard: Optional[list[LeaderboardStat]] = None,
     visibility: VisibilityType = VisibilityType.VISIBLE,
     execution_time: Optional[float] = None,
 ) -> None:
@@ -157,7 +183,7 @@ def finalize(
         assert results["tests"]
         total_score = sum(x.get("score", 0) for x in results["tests"])
         obj = {
-            "leaderboard": leaderboard,
+            "leaderboard": [s.encode() for s in leaderboard] if leaderboard else None,
             "visibility": visibility.value,
             "execution_time": execution_time,
             "score": total_score,
