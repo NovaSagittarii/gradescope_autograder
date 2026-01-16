@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# load env vars
-source /autograder/source/init_env.sh
+source /autograder/source/init_env.sh  # load env vars
 
 ### Installing dependencies ###
 # apt install -y g++ python3 python3-pip

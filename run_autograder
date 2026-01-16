@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+source /autograder/source/init_env.sh  # load env vars
+
 cd /autograder/source/src
 python3 compile.py /autograder/submission
 python3 exec.py /autograder/submission
