@@ -20,6 +20,6 @@ Features
 
 ## Configuration
 
-- edit env vars in [](./init_env.sh) if needed
-- edit solution in [](./src/solution/)
-- edit `generate_tests()` and `judge()` in [](./src/task_details.py)
+- edit env vars in [init_env.sh](./init_env.sh) if needed
+- edit solution in [src/solution/](./src/solution/)
+- edit `generate_tests()` and `judge()` in [src/task_details.py](./src/task_details.py)
