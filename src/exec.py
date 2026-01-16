@@ -9,6 +9,7 @@ https://gradescope-autograders.readthedocs.io/en/latest/best_practices/#security
 
 import base64
 import math
+import os
 import pyseccomp as seccomp
 import socket
 import subprocess
@@ -31,6 +32,8 @@ for network in [socket.AF_INET, socket.AF_INET6]:
         seccomp.Arg(0, seccomp.EQ, network),
     )
 filter.load()
+
+os.environ.clear()  # remove any env that might be loaded
 
 for id, payload in task_details.generate_tests().items():
     assert id != "a", "a.out is reserved for the binary"
