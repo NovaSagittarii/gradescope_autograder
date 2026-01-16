@@ -33,3 +33,7 @@ find / -type d -perm /002 -exec chmod o-w {} \; 2>/dev/null
 
 # restricted user still needs to execute files to run student code
 chmod 755 $(which python3) /usr/bin/env $(which bash)
+
+# disallow student processes from having internet access
+# iptables -I OUTPUT 1 -m owner --uid-owner student -j DROP
+# iptables -I OUTPUT 1 -m owner --gid-owner student -j DROP
