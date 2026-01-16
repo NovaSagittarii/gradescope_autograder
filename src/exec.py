@@ -46,8 +46,9 @@ for id, payload in task_details.generate_tests().items():
     )
     start = time.time()
     try:
-        subprocess.run(cmd, shell=True, check=False, timeout=task_details.TIMELIMIT_SECONDS)
+        p = subprocess.run(cmd, shell=True, check=False, timeout=task_details.TIMELIMIT_SECONDS)
     except subprocess.TimeoutExpired:
         pass
     runtime_ms = math.ceil((time.time() - start) * 1000)
     subprocess.run(f"echo {runtime_ms} > {SOURCE_PATH}/{id}.time", shell=True)
+    subprocess.run(f"echo {p.returncode} > {SOURCE_PATH}/{id}.exitcode", shell=True)

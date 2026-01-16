@@ -28,6 +28,8 @@ for id, test in tests.items():
         jans = file.read()
     with open(f"{ANS_PATH}/{id}.out", "r") as file:
         ans = file.read()
+    with open(f"{ANS_PATH}/{id}.exitcode", "r") as file:
+        exitcode = int(file.read())
     with open(f"{ANS_PATH}/{id}.err", "r") as file:
         stderr = file.read()
         stderr = f"\n# Errors\n```\n{stderr}```\n" if stderr else ""
@@ -39,6 +41,8 @@ for id, test in tests.items():
         passed_all = False
 
     verdict = 'Accepted' if result.passed else 'Wrong answer'
+    if exitcode:
+        verdict = "Runtime error"
     if runtime_ms/1000 >= task_details.TIMELIMIT_SECONDS:
         verdict = f"Time limit exceeded ({task_details.TIMELIMIT_SECONDS:.1f}s)"
     partial_output = f"""{verdict}
