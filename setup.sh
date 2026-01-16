@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# load env vars
+source ./init_env.sh
+
 ### Installing dependencies ###
 # apt install -y g++ python3 python3-pip
 # ^^^ these are already available in gradescope base image
