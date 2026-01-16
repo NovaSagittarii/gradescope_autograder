@@ -18,6 +18,7 @@ tests = task_details.generate_tests()
 
 with open(f"{ANS_PATH}/size.meta", "r") as file:
     filesize = int(file.read())
+    print(f"filesize={filesize}")
 with open(f"{ANS_PATH}/lang.meta", "r") as file:
     language = file.read()
 
@@ -37,7 +38,10 @@ for id, test in tests.items():
     if not result.passed:
         passed_all = False
 
-    partial_output = f"""{'Accepted' if result.passed else 'Wrong answer'}
+    verdict = 'Accepted' if result.passed else 'Wrong answer'
+    if runtime_ms/1000 >= task_details.TIMELIMIT_SECONDS:
+        verdict = f"Time limit exceeded ({task_details.TIMELIMIT_SECONDS:.1f}s)"
+    partial_output = f"""{verdict}
 Runtime: {runtime_ms} ms"""
     full_output = f"""{partial_output}
 

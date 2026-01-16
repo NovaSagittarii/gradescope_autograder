@@ -42,6 +42,9 @@ for id, payload in task_details.generate_tests().items():
         + f"1> {SOURCE_PATH}/{id}.out 2> {SOURCE_PATH}/{id}.err"
     )
     start = time.time()
-    subprocess.run(cmd, shell=True, check=False, timeout=10)
+    try:
+        subprocess.run(cmd, shell=True, check=False, timeout=task_details.TIMELIMIT_SECONDS)
+    except subprocess.TimeoutExpired:
+        pass
     runtime_ms = math.ceil((time.time() - start) * 1000)
     subprocess.run(f"echo {runtime_ms} > {SOURCE_PATH}/{id}.time", shell=True)

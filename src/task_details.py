@@ -2,6 +2,9 @@
 Edit this file to modify how tests are generated and how judge output.
 """
 
+from typing import Final
+TIMELIMIT_SECONDS: Final[float] = 10.0
+
 
 class TestCase:
     def __init__(self, data: str, max_score: float = 1.0, hidden: bool = False):
