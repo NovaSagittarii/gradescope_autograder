@@ -57,10 +57,11 @@ Runtime: {runtime_ms} ms"""
 ```
 {jans}```"""
 
+    status = "passed" if result.passed else "failed"
     if not test.hidden:
         gradescope.append_test(
             f"Test {id}",
-            status="passed",
+            status=status,
             score=result.score,
             max_score=test.max_score,
             output=full_output,
@@ -69,7 +70,7 @@ Runtime: {runtime_ms} ms"""
     else:
         gradescope.append_test(
             f"Test {id}",
-            status="passed",
+            status=status,
             score=result.score,
             max_score=test.max_score,
             output=partial_output,
@@ -77,7 +78,7 @@ Runtime: {runtime_ms} ms"""
         )
         gradescope.append_test(
             f"Test {id} (debug)",
-            status="passed",
+            status=status,
             score=0,
             max_score=0,
             output=full_output,
