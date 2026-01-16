@@ -44,7 +44,10 @@ match language:
             f.write(f"#!/usr/bin/env bash\npython3 {SOURCE_PATH}/*.py")
         subprocess.run(f"chmod +x {SOURCE_PATH}/a.out", shell=True)
     case None:
-        pass
+        stderr = (
+            "Unable to detect language of source. "
+            + "Please upload *.cpp files or a single *.py file."
+        )
 
 print("[compile.py] LANGUAGE=", language)
 if stderr:
