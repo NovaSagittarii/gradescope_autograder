@@ -33,7 +33,10 @@ stderr: Optional[str] = None
 match language:
     case "cpp":  # build cpp
         p = subprocess.run(
-            f"g++ -std=c++20 -o {SOURCE_PATH}/a.out {SOURCE_PATH}/*.cpp {SOURCE_PATH}/**/*.cpp -I{SOURCE_PATH}",
+            f"g++ -std=c++20 -o {SOURCE_PATH}/a.out {SOURCE_PATH}/*.cpp",
+            # the following WOULD work if it ran in bash, but it runs in sh oop
+            # "shopt -s nullglob; " +  # for compile.py **/*.cpp files
+            # f"g++ -std=c++20 -o {SOURCE_PATH}/a.out {SOURCE_PATH}/*.cpp {SOURCE_PATH}/**/*.cpp -I{SOURCE_PATH}",
             stderr=subprocess.PIPE,
             shell=True,
             check=False,
