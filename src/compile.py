@@ -33,7 +33,7 @@ stderr: Optional[str] = None
 match language:
     case "cpp":  # build cpp
         p = subprocess.run(
-            f"g++ -std=c++20 -o {SOURCE_PATH}/a.out {SOURCE_PATH}/*.cpp",
+            f"g++ -std=c++20 -o {SOURCE_PATH}/a.out {SOURCE_PATH}/*.cpp {SOURCE_PATH}/**/*.cpp -I{SOURCE_PATH}",
             stderr=subprocess.PIPE,
             shell=True,
             check=False,
