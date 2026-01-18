@@ -82,7 +82,7 @@ Runtime: {runtime_ms} ms"""
             visibility=gradescope.VisibilityType.AFTER_DUE_DATE,
         )
         gradescope.append_test(
-            f"*{test_name} [for TAs]",
+            f"{test_name} [*for TAs]",
             status=status,
             score=0,
             max_score=0,
