@@ -61,7 +61,7 @@ Runtime: {runtime_ms} ms"""
 ```
 {jans}```"""
 
-    test_name = f"Test {id}{f" ({test.label})" if test.label else ""}"
+    test_name = f"Test {id}" + (f" ({test.label})" if test.label else "")
     status = "passed" if result.passed else "failed"
     if not test.hidden:
         gradescope.append_test(
