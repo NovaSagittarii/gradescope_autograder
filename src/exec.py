@@ -33,10 +33,10 @@ for network in [socket.AF_INET, socket.AF_INET6]:
     )
 filter.load()
 
-tasks = task_details.generate_tests().items()  # generate before environ.clear()
+tasks = task_details.generate_tests()  # generate before environ.clear()
 os.environ.clear()  # remove any env that might be loaded
 
-for id, payload in tasks:
+for id, payload in enumerate(tasks):
     assert id != "a", "a.out is reserved for the binary"
     # pass as base64 from stdin to avoid any escaping character issues
     base64payload = base64.b64encode(payload.data.encode()).decode()

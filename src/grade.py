@@ -23,7 +23,7 @@ with open(f"{ANS_PATH}/lang.meta", "r") as file:
     language = file.read()
 
 passed_all = True
-for id, test in tests.items():
+for id, test in enumerate(tests):
     with open(f"{JANS_PATH}/{id}.out", "r") as file:
         jans = file.read()
     with open(f"{ANS_PATH}/{id}.out", "r") as file:
@@ -61,10 +61,11 @@ Runtime: {runtime_ms} ms"""
 ```
 {jans}```"""
 
+    test_name = f"Test {id}{f" ({test.label})" if test.label else ""}"
     status = "passed" if result.passed else "failed"
     if not test.hidden:
         gradescope.append_test(
-            f"Test {id}",
+            test_name,
             status=status,
             score=result.score,
             max_score=test.max_score,
@@ -73,7 +74,7 @@ Runtime: {runtime_ms} ms"""
         )
     else:
         gradescope.append_test(
-            f"Test {id}",
+            test_name,
             status=status,
             score=result.score,
             max_score=test.max_score,
@@ -81,7 +82,7 @@ Runtime: {runtime_ms} ms"""
             visibility=gradescope.VisibilityType.AFTER_DUE_DATE,
         )
         gradescope.append_test(
-            f"Test {id} (debug)",
+            f"*{test_name} [for TAs]",
             status=status,
             score=0,
             max_score=0,
