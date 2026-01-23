@@ -56,3 +56,4 @@ print("[compile.py] LANGUAGE=", language)
 if stderr:
     print(stderr)
     gradescope.append_test(f"Compile Error ({language})", "failed", output=stderr)
+    sys.exit(1)

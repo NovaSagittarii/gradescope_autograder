@@ -4,6 +4,6 @@ set -euo pipefail
 source /autograder/source/init_env.sh  # load env vars
 
 cd /autograder/source/src
-python3 compile.py /autograder/submission
+python3 compile.py /autograder/submission || exit 0  # compile fail?
 python3 exec.py /autograder/submission
 python3 grade.py /autograder/source/src/solution /autograder/submission
