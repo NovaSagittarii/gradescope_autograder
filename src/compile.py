@@ -24,7 +24,8 @@ for file in files:
         language = "py3"
 
 subprocess.run(
-    f"du -sbc {SOURCE_PATH}/* | sort -n -r | head -n 1 | cut -f 1 > {SOURCE_PATH}/size.meta", shell=True
+    f"du -sbc {SOURCE_PATH}/* | sort -n -r | head -n 1 | cut -f 1 > {SOURCE_PATH}/size.meta",
+    shell=True,
 )
 with open(f"{SOURCE_PATH}/lang.meta", "w") as f:
     f.write(language if language else "N/A")
@@ -55,6 +56,8 @@ match language:
 print("[compile.py] LANGUAGE=", language)
 if stderr:
     print(stderr)
-    gradescope.append_test(f"Compile Error ({language})", "failed", output=stderr)
+    gradescope.append_test(
+        f"Compile Error ({language})", "failed", output=stderr, score=0, max_score=0
+    )
     gradescope.finalize()
     sys.exit(1)
