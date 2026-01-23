@@ -46,10 +46,12 @@ for id, payload in enumerate(tasks):
         + f"1> {SOURCE_PATH}/{id}.out 2> {SOURCE_PATH}/{id}.err"
     )
     start = time.time()
+    returncode = 0
     try:
         p = subprocess.run(cmd, shell=True, check=False, timeout=task_details.TIMELIMIT_SECONDS)
+        returncode = p.returncode
     except subprocess.TimeoutExpired:
         pass
     runtime_ms = math.ceil((time.time() - start) * 1000)
     subprocess.run(f"echo {runtime_ms} > {SOURCE_PATH}/{id}.time", shell=True)
-    subprocess.run(f"echo {p.returncode} > {SOURCE_PATH}/{id}.exitcode", shell=True)
+    subprocess.run(f"echo {returncode} > {SOURCE_PATH}/{id}.exitcode", shell=True)
