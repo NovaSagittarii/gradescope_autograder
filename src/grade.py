@@ -25,9 +25,9 @@ with open(f"{ANS_PATH}/lang.meta", "r") as file:
 passed_all = True
 for id, test in enumerate(tests):
     with open(f"{JANS_PATH}/{id}.out", "r") as file:
-        jans = file.read()
-    with open(f"{ANS_PATH}/{id}.out", "r") as file:
-        ans = file.read()
+        jans = file.read()  # judge should not output invalid UTF-8
+    with open(f"{ANS_PATH}/{id}.out", "rb") as file:
+        ans = file.read().decode(errors="replace")
     with open(f"{ANS_PATH}/{id}.exitcode", "r") as file:
         exitcode = int(file.read())
     with open(f"{ANS_PATH}/{id}.err", "r") as file:
@@ -40,10 +40,10 @@ for id, test in enumerate(tests):
     if not result.passed:
         passed_all = False
 
-    verdict = 'Accepted' if result.passed else 'Wrong answer'
+    verdict = "Accepted" if result.passed else "Wrong answer"
     if exitcode:
         verdict = "Runtime error"
-    if runtime_ms/1000 >= task_details.TIMELIMIT_SECONDS:
+    if runtime_ms / 1000 >= task_details.TIMELIMIT_SECONDS:
         verdict = f"Time limit exceeded ({task_details.TIMELIMIT_SECONDS:.1f}s)"
     partial_output = f"""{verdict}
 Runtime: {runtime_ms} ms"""
